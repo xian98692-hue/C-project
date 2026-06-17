@@ -1,5 +1,10 @@
 #include <stdio.h>
+
 int main() {
-	printf("hello world");
-	return 0;
+    int sum = 0;
+    for (int i = 1; i <= 5; i++) {
+        sum += i;
+    }
+    printf("Sum = %d\n", sum);
+    return 0;
 }
