@@ -43,6 +43,9 @@ void SPI2_MspInit(void) {
 
 void SPI2_CS_Control(unit8_t state) {
 	if (state == 0) {
-		//
-	}
+		GPIOB->BSRR |= GPIO_BSRR_BR12
+	};//拉低选中
+	else {
+		GPIOB->BSRR |= GPIO_BSRR_BS12
+	};//拉高选中
 }
