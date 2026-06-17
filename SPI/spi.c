@@ -43,6 +43,6 @@ void SPI2_MspInit(void) {
 
 void SPI2_CS_Control(unit8_t state) {
 	if (state == 0) {
-
+		//
 	}
 }
