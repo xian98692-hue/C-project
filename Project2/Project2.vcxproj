@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="project2-main.c" />
     <ClCompile Include="project2.c" />
+    <ClCompile Include="黑魔法.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
