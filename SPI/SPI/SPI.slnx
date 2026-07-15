@@ -1,7 +1,0 @@
-<Solution>
-  <Configurations>
-    <Platform Name="x64" />
-    <Platform Name="x86" />
-  </Configurations>
-  <Project Path="SPI.vcxproj" Id="757118e1-89de-4506-bc25-31f9f1e366c3" />
-</Solution>

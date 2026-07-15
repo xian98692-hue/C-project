@@ -24,5 +24,13 @@
     <ClCompile Include="黑魔法.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="两数相加.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="两数相加.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

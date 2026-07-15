@@ -1,8 +1,0 @@
-<Solution>
-  <Configurations>
-    <Platform Name="x64" />
-    <Platform Name="x86" />
-  </Configurations>
-  <Project Path="../GPIO_EXTI/GPIO_EXTI.vcxproj" Id="3243d5d7-5cc8-4f94-a3a6-ea24ed652160" />
-  <Project Path="GPIO_input.vcxproj" Id="158ff0b6-1b10-4ddc-94ad-d6b2529a3c81" />
-</Solution>
