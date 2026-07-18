@@ -139,6 +139,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ListNode.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
