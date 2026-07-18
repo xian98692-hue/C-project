@@ -1,7 +1,12 @@
-#include "stdlib.h"
+#include"ListNode.h"
+
 
 int main(void) {
-
-
+	int value[] = {5,10,15,20,25};
+	int k = sizeof(value)/sizeof(value[0]);
+	printf("%d\n", k);
+	list_node* head=create_node(value, k);
+	printf_list(head);
+    free_list(head);
 	return 0b1111;
 };
