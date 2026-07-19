@@ -1,4 +1,6 @@
 #include "stdint.h"
+#include "hei_mo_fa.h"
+
 float Q_rsqrt(float number) {
 	int32_t i;
 	float x2, y;
