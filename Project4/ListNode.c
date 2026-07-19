@@ -26,6 +26,7 @@ void printf_list(list_node* head) {
 		printf("%d->", head->value);
 		head = head->next;
 	};
+	
 };
 
 void free_list(list_node* head) {
@@ -39,4 +40,19 @@ void free_list(list_node* head) {
 		printf("\nfree successfully.");
 	};
 
+};
+
+//在任意节点上插入新节点
+//二级指针可以修改外部变量
+void insert_node(int val[], int length,list_node** old_node) {
+	list_node* new_node = create_node(val, length);
+	list_node* old_next_node = (*old_node)->next;//restore
+
+	(*old_node)->next = new_node;//旧节点的指针内容被修改，指向新节点
+	//要使得新链表的尾部节点指向原有的旧的接下来的节点地址
+	for (int i = 1; i < length; i++) {
+		new_node = new_node->next;
+	};
+
+	new_node->next = old_next_node;
 };
