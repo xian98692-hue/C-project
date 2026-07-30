@@ -1,4 +1,4 @@
-#include"hash.h"
+#include"hash.h"//哈希函数可以得到一个尽可能独特的值
 uint32_t hash_string(const char* s) {
     uint32_t  hash = 0;
     if (!s) return 0;

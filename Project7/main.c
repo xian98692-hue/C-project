@@ -1,4 +1,5 @@
 #include"hash.h"
+#include"array.h"
 #include"stdio.h"
 int main(void) {
 	// 例子 1：哈希字符串（虽然它带 len，但通常传 strlen）
@@ -14,4 +15,7 @@ int main(void) {
 	uint32_t h3 = hash_fnv1a(&pt, sizeof(pt)); // 处理该结构体内存区域的原始字节
 	printf("%u,%u,%u\n", h1, h2, h3);
 	printf("%x,%x,%x\n", h1, h2, h3);
+	array_cpy();
+
+	return 666;
 };
