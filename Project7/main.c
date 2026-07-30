@@ -16,6 +16,6 @@ int main(void) {
 	printf("%u,%u,%u\n", h1, h2, h3);
 	printf("%x,%x,%x\n", h1, h2, h3);
 	array_cpy();
-
+	strlen_sizeof_cmp();
 	return 666;
 };

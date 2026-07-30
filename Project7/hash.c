@@ -18,3 +18,11 @@ uint32_t hash_fnv1a(const void* data, size_t len) {
     }
     return hash;
 }
+
+HashTable* create_hashtable(int size) {
+    HashTable* t = malloc(sizeof(HashTable));
+    t->size = size;
+    t->count = 0;
+    t->buckets = calloc(size, sizeof(Node*));
+    return t;
+}
