@@ -16,3 +16,5 @@ typedef struct HashTable {
 } HashTable;
 
 HashTable* create_hashtable(int size);
+
+void insert(HashTable* table, const char* key, int value);

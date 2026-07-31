@@ -15,7 +15,7 @@ uint32_t hash_fnv1a(const void* data, size_t len) {
     for (size_t i = 0; i < len; i++) {
         hash ^= bytes[i];
         hash *= 16777619u;
-    }
+    };
     return hash;
 }
 
@@ -25,4 +25,26 @@ HashTable* create_hashtable(int size) {
     t->count = 0;
     t->buckets = calloc(size, sizeof(Node*));
     return t;
+}
+
+void insert(HashTable* table, const char* key, int value) {
+
+    unsigned int idx = hash_fnv1a(key, table->size);
+    Node* cur = table->buckets[idx];
+
+    while (cur) {
+        if (strcmp(cur->key, key) == 0) {
+            cur->value = value;   // 更新已有值
+            return;
+        }
+        cur = cur->next;
+    }
+
+    // 新建节点并插入链表头部
+    Node* node = malloc(sizeof(Node));
+    node->key = strdup(key);      // 深拷贝键
+    node->value = value;
+    node->next = table->buckets[idx];
+    table->buckets[idx] = node;
+    table->count++;
 }
