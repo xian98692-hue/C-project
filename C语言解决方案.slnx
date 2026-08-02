@@ -11,4 +11,6 @@
   <Project Path="Project6/Project6.vcxproj" Id="2c3d54a8-7a61-48a8-b2a6-32abdb07ef58" />
   <Project Path="Project7/Project7.vcxproj" Id="2ececc5d-c93c-458e-8836-567b8f112d90" />
   <Project Path="Project8/Project8.vcxproj" Id="a61e171e-0354-4b58-a22e-c662d9d37437" />
+  <Project Path="Project9/Project9.vcxproj" Id="f9db8262-3769-4e9a-b817-5c1c647bf216" />
+  <Project Path="WindowsProject1/WindowsProject1.vcxproj" Id="3ab53103-28c3-4e65-af90-2e2781cf94a1" />
 </Solution>

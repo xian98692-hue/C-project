@@ -14,3 +14,49 @@ float Q_rsqrt(float number) {
 	y = y * (threehalfs - (x2 * y * y));//第二轮迭代
 	return y;
 }
+
+int isValid(char* s) {
+    int len = strlen(s);
+    if (len == 0) {
+        return true;
+    };
+    if (len % 2 != 0) {
+        return false;
+    };
+    char* left_array = (char*)malloc((len / 2) * sizeof(char));
+    if (left_array == NULL)return false;
+    char* right_array = (char*)malloc((len / 2) * sizeof(char));
+    if (right_array == NULL)return false;
+
+    for (int i = 0; i < len; i++) {
+        int j = 0;
+        if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
+            left_array[j] = s[i];
+            j++;
+        };
+    };
+    for (int i = 0; i < len; i++) {
+        int j = 0;
+        if (s[i] == ')' || s[i] == ']' || s[i] == '}') {
+            right_array[j] = s[i];
+            j++;
+        };
+    };
+    for (int i = 0; i < (len / 2); i++) {
+        if (right_array[i] == '}') {
+            right_array[i] = '{';
+        }
+        else if (right_array[i] == ']') {
+            right_array[i] = '[';
+        }
+        else if (right_array[i] == ')') {
+            right_array[i] = '(';
+        };
+    };
+    if (right_array == left_array) {
+        return true;
+    }
+    else {
+        return false;
+    };
+}
