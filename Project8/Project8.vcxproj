@@ -24,6 +24,7 @@
     <ProjectGuid>{a61e171e-0354-4b58-a22e-c662d9d37437}</ProjectGuid>
     <RootNamespace>Project8</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>polynomial</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

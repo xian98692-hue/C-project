@@ -24,6 +24,7 @@
     <ProjectGuid>{3ab53103-28c3-4e65-af90-2e2781cf94a1}</ProjectGuid>
     <RootNamespace>WindowsProject1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>计算器(图形界面)</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
