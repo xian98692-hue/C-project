@@ -7,6 +7,9 @@ int main(void) {
 		printf("Deque creation failed.\n");
 		return 1;
 	};
+
+	head = Push(0, head);
+
 	PrintDeque(head,'h');
 
 	return 0;
