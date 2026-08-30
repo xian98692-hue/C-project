@@ -3,6 +3,7 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="deque/deque.vcxproj" Id="5c1354cb-7008-48f1-a998-bdf3bda2f320" />
   <Project Path="Project1/Project1.vcxproj" Id="1310be80-310e-46f5-b9e0-035866058188" />
   <Project Path="Project2/Project2.vcxproj" Id="deb7a984-05a0-4fd0-94f6-4c2c5260aa7e" />
   <Project Path="project3/project3.vcxproj" Id="500a4367-5430-4a7a-81d0-5326fdef63f1" />
