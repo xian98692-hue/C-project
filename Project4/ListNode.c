@@ -1,23 +1,29 @@
-#include "stdint.h"
+#include "stdlib.h"
 #include "stdio.h"
 #include "ListNode.h"
 
 
 list_node* create_node(int val[], int len) {
-	list_node* node = (list_node*)malloc(sizeof(list_node));
-	list_node* head = node;
+	list_node* head=NULL;
+	list_node* prev = NULL;
+	list_node* node = NULL;
 	for (int i = 0; i < len; i++) {
-		list_node* next_node = (list_node*)malloc(sizeof(list_node));
+		node = (list_node*)malloc(sizeof(list_node));
 		if (node == NULL) {
-			printf("malloc null.");
-			break;
+			printf("malloc = NULL.");
+			return 0;
 		};
-		if (i == len - 1) {
-			next_node = NULL;
-		};//为了终止打印
 		node->value = val[i];
-		node->next = next_node;
-		node = node->next;
+		node->next = NULL;
+		if (head==NULL) {
+			head = node;
+			prev = node;
+		}
+		else {
+			
+			prev->next = node;
+			prev = node;
+		};
 	};
 	return head;
 };
@@ -56,3 +62,38 @@ void insert_node(int val[], int length,list_node** old_node) {
 
 	new_node->next = old_next_node;
 };
+
+void normal_delete(int val, list_node** head) {//标准删除算法，需防止free后节点断裂指向
+	list_node* node = *head;
+	list_node* prev = NULL;
+	while (node != NULL) {
+		if (node->value == val) {
+			if (prev == NULL) {
+				// 删除的是头节点
+				*head = node->next;
+			}
+			else {
+				// 删除的是中间或尾节点
+				prev->next = node->next;
+			}
+			free(node);
+			printf("Deleted %d successfully.\n", val);
+			return;
+		}
+		prev = node;
+		node = node->next;
+	};
+	printf("no target to be deleted.");
+}
+
+void lazy_delete_mark(int val, list_node** head) {
+	list_node* node = *head;
+	while (node != NULL) {
+		if (node->value == val) {
+			node->k = true;
+			break;
+		};
+		node = node->next;
+	};
+	printf("not found target.");
+}
