@@ -9,8 +9,8 @@ typedef struct deque {
 
 deque* Push(int x, deque* head);
 deque* Inject(int x, deque* tail);
-deque* Pop(deque** head);
-deque* Eject(deque** tail);
+int Pop(deque** head);
+int Eject(deque** tail);
 void PrintDeque(deque* node,char c);
 deque* create_deque(int x[],int len,char choice);
 deque* create_node(int x);

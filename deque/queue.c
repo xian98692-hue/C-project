@@ -12,9 +12,9 @@ deque* Push(int x, deque* head) {
 
 deque* Inject(int x, deque* tail) {
 	deque* new_node = create_node(x);
-	tail->forward = new_node;
-	new_node->behind = tail;
-	tail = tail->forward;
+	tail->behind = new_node;
+	new_node->forward = tail;
+	tail = tail->behind;
 	return tail;
 };
 deque* create_node(int x) {
@@ -65,11 +65,11 @@ deque* create_deque(int x[],int len,char choice) {
 void PrintDeque(deque* node,char c) {
 	while (node != NULL) {
 		if (c == 'h') {
-			printf("%d\n", node->num);
+			printf("%d->", node->num);
 			node = node->behind;
 		}
 		else if (c == 't') {
-			printf("%d\n", node->num);
+			printf("%d<-", node->num);
 			node = node->forward;
 		}
 		else {
@@ -77,4 +77,20 @@ void PrintDeque(deque* node,char c) {
 			break;
 		};
 	};
+}
+
+int Pop(deque** head) {
+	int x=(*head)->num;
+	deque* temp = *head;
+	*head = (*head)->behind;
+	free(temp);
+	return x;
+}
+
+int Eject(deque** tail) {
+	int x = (*tail)->num;
+	deque* temp = *tail;
+	*tail = (*tail)->forward;
+	free(temp);
+	return x;
 }
