@@ -4,7 +4,7 @@
 
 typedef struct list_node {
 	int value;
-	bool k;
+	bool delete_mark;
 	struct list_node* next;
 }list_node;
 
@@ -14,5 +14,7 @@ void free_list(list_node* head);
 void insert_node(int val[], int length, list_node** old_node);
 void normal_delete(int val, list_node** head);
 
-void lazy_delete_mark(int val, list_node** head);
+int lazy_delete_mark(int val, list_node** head);
+
+int lazy_delete(list_node** head);
 #endif 

@@ -15,6 +15,7 @@ list_node* create_node(int val[], int len) {
 		};
 		node->value = val[i];
 		node->next = NULL;
+		node->delete_mark = false;
 		if (head==NULL) {
 			head = node;
 			prev = node;
@@ -86,14 +87,45 @@ void normal_delete(int val, list_node** head) {//标准删除算法，需防止f
 	printf("no target to be deleted.");
 }
 
-void lazy_delete_mark(int val, list_node** head) {
+int lazy_delete_mark(int val, list_node** head) {
 	list_node* node = *head;
 	while (node != NULL) {
 		if (node->value == val) {
-			node->k = true;
-			break;
+			node->delete_mark = true;
+			return 0;
 		};
 		node = node->next;
 	};
 	printf("not found target.");
+	return -1;
+}
+
+int lazy_delete(list_node** head) {
+	list_node* node = *head;
+	list_node* temp = node;
+	int delete_nums = 0;
+	int list_length = 0;
+	while (node != NULL) {
+		if (node->delete_mark == true) {
+			delete_nums++;
+		};
+		list_length++;
+		node = node->next;
+	};
+	if (delete_nums >= list_length / 2) {
+		while (temp != NULL) {
+			if (temp->delete_mark == true) {
+				list_node* curr = temp->next;
+				normal_delete(temp->value, head);//这里free temp指向的块，不可访问temp
+				temp = curr;
+			}
+			else {
+				temp = temp->next;
+				continue;
+			};
+			
+		};
+		return 0;
+	};
+	return 1;
 }
