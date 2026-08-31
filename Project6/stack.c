@@ -1,8 +1,12 @@
 # include"stack.h"
 #include"stdio.h"
-
+#include"stdlib.h"
 stack* create_stack_node(int val) {
 	stack* head = (stack*)malloc(sizeof(stack));
+	if (head == NULL) {
+		printf("malloc error");
+		return 0;
+	};
 	head->val = val;
 	head->next = NULL;
 	return head;
