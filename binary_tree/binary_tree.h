@@ -8,5 +8,7 @@ typedef struct tree_node {
 }node;
 
 node* create_tree_node(int num);
-node* create_tree(int nums[]);//return root
+node* insert(int num, node* root);
+node* iteration_insert(int num,node* root );
+void printf_tree(node* root);
 #endif // !BINARY_TREE
