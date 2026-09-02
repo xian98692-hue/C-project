@@ -3,16 +3,17 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="binary_tree/binary_tree.vcxproj" Id="2b4e981e-0e76-48e4-92ec-b7ad198e4d04" />
   <Project Path="deque/deque.vcxproj" Id="5c1354cb-7008-48f1-a998-bdf3bda2f320" />
   <Project Path="postfix expression/postfix expression.vcxproj" Id="61930a65-0b68-4038-8d4b-fd3d7ddfd6d8" />
-  <Project Path="Project1/Project1.vcxproj" Id="1310be80-310e-46f5-b9e0-035866058188" />
-  <Project Path="Project2/Project2.vcxproj" Id="deb7a984-05a0-4fd0-94f6-4c2c5260aa7e" />
-  <Project Path="project3/project3.vcxproj" Id="500a4367-5430-4a7a-81d0-5326fdef63f1" />
-  <Project Path="Project4/Project4.vcxproj" Id="e509e0f0-c7e9-4cee-a774-dc1580a99d4e" />
-  <Project Path="Project5/Project5.vcxproj" Id="2cbad39d-8b0f-4636-b11a-6cb0dd0edfdb" />
-  <Project Path="Project6/Project6.vcxproj" Id="2c3d54a8-7a61-48a8-b2a6-32abdb07ef58" />
-  <Project Path="Project7/Project7.vcxproj" Id="2ececc5d-c93c-458e-8836-567b8f112d90" />
-  <Project Path="Project8/Project8.vcxproj" Id="a61e171e-0354-4b58-a22e-c662d9d37437" />
-  <Project Path="Project9/Project9.vcxproj" Id="f9db8262-3769-4e9a-b817-5c1c647bf216" />
-  <Project Path="WindowsProject1/WindowsProject1.vcxproj" Id="3ab53103-28c3-4e65-af90-2e2781cf94a1" />
+  <Project Path="hello_world/Project1.vcxproj" Id="1310be80-310e-46f5-b9e0-035866058188" />
+  <Project Path="hei_mo_fa/Project2.vcxproj" Id="deb7a984-05a0-4fd0-94f6-4c2c5260aa7e" />
+  <Project Path="listnode/project3.vcxproj" Id="500a4367-5430-4a7a-81d0-5326fdef63f1" />
+  <Project Path="list/Project4.vcxproj" Id="e509e0f0-c7e9-4cee-a774-dc1580a99d4e" />
+  <Project Path="queue/Project5.vcxproj" Id="2cbad39d-8b0f-4636-b11a-6cb0dd0edfdb" />
+  <Project Path="stack/Project6.vcxproj" Id="2c3d54a8-7a61-48a8-b2a6-32abdb07ef58" />
+  <Project Path="hash/Project7.vcxproj" Id="2ececc5d-c93c-458e-8836-567b8f112d90" />
+  <Project Path="polynomial/Project8.vcxproj" Id="a61e171e-0354-4b58-a22e-c662d9d37437" />
+  <Project Path="计算器/Project9.vcxproj" Id="f9db8262-3769-4e9a-b817-5c1c647bf216" />
+  <Project Path="ji_suan_qi/WindowsProject1.vcxproj" Id="3ab53103-28c3-4e65-af90-2e2781cf94a1" />
 </Solution>
