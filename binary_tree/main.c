@@ -7,16 +7,20 @@ int main(void) {
 	printf("%d", len);
 	*/
 
-	node* root = insert(6, NULL);
-	root = insert(2, root);
-    root = insert(7, root);
-	root = insert(9, root);
-	root = insert(3, root);
-	root = insert(1, root);
-	root = insert(5, root);
+	node* root = insert(10, NULL);
 	root = insert(4, root);
-	root = insert(0, root);
-	
+    root = insert(12, root);
+	root = insert(3, root);
+	root = insert(5, root);
+	root = insert(11, root);
+	root = insert(13, root);
+	root = insert(1, root);
+	root = insert(6, root);
+	node* max_node = find_max(root);
+	//printf("%d\n", max_node->num);
+
+	root=delete_node(4, root);
+	root = delete_node(3,root);
 	printf_tree(root);
 	return 0;
 };

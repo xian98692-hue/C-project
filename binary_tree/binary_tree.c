@@ -72,7 +72,101 @@ void printf_tree(node* root) {
 	};
 	//printf("the curr node's num is %d\n", root->num);
 	printf_tree(root->left_child);
-	//printf("the curr node's num is %d\n", root->num);
-	printf_tree(root->right_child);
 	printf("the curr node's num is %d\n", root->num);
+	printf_tree(root->right_child);
+	//printf("the curr node's num is %d\n", root->num);
+}
+
+node* find_max(node* root) {
+	if (root == NULL) {
+		return NULL;
+	};
+	while (root->right_child != NULL) {
+		root = root->right_child;
+	};
+	return root;
+}
+node* find_min(node* root) {
+	if (root == NULL) {
+		printf("the root is NULL.can not be found min node.\n");
+		return NULL;
+	};
+	while (root->left_child != NULL) {
+		root = root->left_child;
+	};
+	printf("successfully find the min node.the node's num is %d.\n", root->num);
+	return root;
+}
+node* delete_node(int target_num, node* root) {
+	if (root == NULL) {
+		printf("the input is NULL.");
+		return NULL;
+	};
+	printf("the target num would be deleted is %d.\n",target_num);
+	const node* const_root = root;
+	node* prev = NULL;
+	while (root != NULL) {
+		if (target_num < root->num) {
+			prev = root;
+			root = root->left_child;
+		}
+		else if (target_num > root->num) {
+			prev = root;
+			root = root->right_child;
+		}
+		else if (target_num == root->num) {
+			if (root->right_child == NULL && root->left_child == NULL) {
+				printf("the deleted node is leave.\n");
+				free(root);
+				return const_root;
+			}
+			else if (root->right_child == NULL && root->left_child != NULL && prev->left_child == root) {
+				printf("the deleted node only has one child.\n");
+				prev->left_child = root->left_child;
+				free(root);
+				return const_root;
+			}
+			else if (root->left_child == NULL && root->right_child != NULL && prev->right_child == root) {
+				printf("the deleted node only has one child.\n");
+				prev->right_child = root->right_child;
+				free(root);
+				return const_root;
+			}
+			else if (root->right_child == NULL && root->left_child != NULL && prev->right_child == root) {
+				printf("the deleted node only has one child.\n");
+				prev->right_child = root->left_child;
+				free(root);
+				return const_root;
+			}
+			else if (root->left_child == NULL && root->right_child != NULL && prev->left_child == root) {
+				printf("the deleted node only has one child.\n");
+				prev->left_child = root->right_child;
+				free(root);
+				return const_root;
+			}
+			else if (root->left_child != NULL && root->right_child != NULL) {
+				printf("the deleted node has two childs.\n");
+
+				break;
+			};
+		};
+	};
+	printf("the prev node's num is %d\n", prev->num);//10
+	printf("the curr node's num is %d\n", root->num);//4
+	node* min_node = root->right_child;
+	prev = root;
+	printf("be copied.now the prev node's num is %d\n", prev->num);//4
+	while (min_node->left_child != NULL) {
+		prev = min_node;
+		min_node = min_node->left_child;
+	};
+	printf("the prev node is the min node's parent.the prev node's num is %d\n", prev->num);//4
+	printf("successfully find the min node.the node's num is %d.\n", min_node->num);//5
+	root->num = min_node->num;
+	node* right_min_node = min_node->right_child;
+	prev->right_child = right_min_node;
+	printf("the target node has been deleted.the cuur node's num is %d\n",prev->num);
+	free(min_node);
+
+	return const_root;
 }
