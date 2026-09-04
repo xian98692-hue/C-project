@@ -70,11 +70,11 @@ void printf_tree(node* root) {
 		printf("the node is NULL.\n");
 		return;
 	};
-	//printf("the curr node's num is %d\n", root->num);
+	//printf("the current node's num is %d\n", root->num);
 	printf_tree(root->left_child);
-	printf("the curr node's num is %d\n", root->num);
+	printf("the current node's num is %d\n", root->num);
 	printf_tree(root->right_child);
-	//printf("the curr node's num is %d\n", root->num);
+	//printf("the current node's num is %d\n", root->num);
 }
 
 node* find_max(node* root) {
@@ -117,7 +117,16 @@ node* delete_node(int target_num, node* root) {
 		else if (target_num == root->num) {
 			if (root->right_child == NULL && root->left_child == NULL) {
 				printf("the deleted node is leave.\n");
+				if (prev->left_child == root) {
+					printf("prev's left child is the deleted leave.\n");
+					prev->left_child = NULL;
+				}
+				else if (prev->right_child == root) {
+					printf("prev's right child is the deleted leave.\n");
+					prev->right_child = NULL;
+				}
 				free(root);
+
 				return const_root;
 			}
 			else if (root->right_child == NULL && root->left_child != NULL && prev->left_child == root) {

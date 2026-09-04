@@ -20,7 +20,7 @@ int main(void) {
 	//printf("%d\n", max_node->num);
 
 	root=delete_node(4, root);
-	root = delete_node(3,root);
+	root = delete_node(1,root);
 	printf_tree(root);
 	return 0;
 };
