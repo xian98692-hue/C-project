@@ -15,4 +15,6 @@ void printf_tree(node* root);
 node* find_max(node* root);
 node* find_min(node* root);
 node* delete_node(int target_num, node* root);
+
+node* recursion_delete_node(int target_num, node* root);
 #endif // !BINARY_TREE

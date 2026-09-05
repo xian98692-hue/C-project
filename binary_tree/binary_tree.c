@@ -179,3 +179,41 @@ node* delete_node(int target_num, node* root) {
 
 	return const_root;
 }
+
+node* recursion_delete_node(int target_num, node* root) {
+	if (root == NULL) {
+		printf("can not find the target.\n");
+		return NULL;
+	};
+	if (target_num < root->num) {
+		printf("the current node's num is greater than target.\n");
+	
+		root->left_child = recursion_delete_node(target_num, root->left_child);
+	}
+	else if (target_num > root->num) {
+		printf("the current node's num is less than target.\n");
+	
+		root ->right_child= recursion_delete_node(target_num, root->right_child);
+	}
+	else if (target_num == root->num) {
+		printf("the target num has been found successfully.\n");
+		if (root->left_child && root->right_child) {
+			printf("the deleted node has two childs.\n");
+			node* temp = find_min(root->right_child);
+			root->num = temp->num;
+			root->right_child = recursion_delete_node(temp->num, root->right_child);//右子树中的最小节点一定是叶子或单孩节点
+		}
+		else {
+			node* temp = NULL;
+			if (root->left_child == NULL) {
+				temp = root->right_child;
+			}
+			else {
+				temp = root->left_child;
+			};
+			free(root);
+			printf("successfully delete the target num.\n");
+			return temp;
+		};
+	};
+}

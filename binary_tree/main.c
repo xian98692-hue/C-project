@@ -19,8 +19,7 @@ int main(void) {
 	node* max_node = find_max(root);
 	//printf("%d\n", max_node->num);
 
-	root=delete_node(4, root);
-	root = delete_node(1,root);
+	root=recursion_delete_node(12, root);
 	printf_tree(root);
 	return 0;
 };
