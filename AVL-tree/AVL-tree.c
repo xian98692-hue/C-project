@@ -1,15 +1,33 @@
 #include"AVL-tree.h"
 #include<stdlib.h>
+#include<stdio.h>
 avl_node* create_node(int num) {
 	avl_node* new_node = (avl_node*)malloc(sizeof(avl_node));
 	if (new_node == NULL) {
 		printf("malloc is NULL.");
 		return NULL;
 	};
-	new_node->height = 0;
+	new_node->height = 1;//叶子高度为1，空树高度为0
 	new_node->left_tree = new_node->right_tree = NULL;
 	new_node->num = num;
 	return new_node;
+}
+avl_node* search_node(avl_node* node, int target) {
+	while (node != NULL) {
+		if (node->num > target) {
+			node = node->left_tree;
+		}
+		else if (node->num < target) {
+			node = node->right_tree;
+		}
+		else if (node->num == target) {
+			printf("search the target successfully.");
+			return node;
+		};
+	};
+	if (node == NULL) {
+		return NULL;
+	};
 }
 avl_node* recursion_insert_node(avl_node* node, int num) {
 	if (node == NULL) {
@@ -24,5 +42,88 @@ avl_node* recursion_insert_node(avl_node* node, int num) {
 	else if (num > node->num) {
 		printf("the node'num is less than the inserted num.\n");
 		node->right_tree = recursion_insert_node(node->right_tree, num);
+	}
+	else {
+		return node;//重复值不插入
 	};
+	Updateheight(node);
+
+	int balance = get_balance(node);//left-right
+	//get_balance()返回的值大于0是左重，小于0是右重
+	if (balance == 2 && get_balance(node->left_tree)>=0) {//LL
+		return right_rotation(node);
+	}
+	else if (balance == -2 && get_balance(node->right_tree) < 0) {//RR
+		return left_rotation(node);
+	}
+	else if (balance == 2 && get_balance(node->left_tree) < 0) {//LR
+		avl_node* left_node = left_rotation(node->left_tree);
+		node->left_tree = left_node;
+		return right_rotation(node);
+	}
+	else if (balance == -2 && get_balance(node->right_tree) >= 0) {//RL
+		avl_node* right_node = right_rotation(node->right_tree);
+		node->right_tree = right_node;
+		return left_rotation(node);
+	};
+
+	return node;
+}
+void printf_tree(avl_node* root) {
+	if (root == NULL) {
+		printf("the current node is NULL.\n");
+		return;
+	};
+	printf("the current node's num is %d.\n", root->num);
+	printf_tree(root->left_tree);
+	//printf("the current node's num is %d.\n",root->num);
+	printf_tree(root->right_tree);
+}
+avl_node* left_rotation(avl_node* node) {
+	avl_node* right_node = node->right_tree;
+	avl_node* right_left_node = right_node->left_tree;
+
+	right_node->left_tree = node;
+	node->right_tree = right_left_node;
+	//左旋：应对RR，左子树挂到右子树上。
+	Updateheight(node);
+	Updateheight(right_node);
+
+	return right_node;//返回新的子树根
+}
+
+avl_node* right_rotation(avl_node* node) {
+	avl_node* left_node = node->left_tree;
+	avl_node* left_right_node = left_node->right_tree;
+
+	left_node->right_tree = node;
+	node->left_tree = left_right_node;
+
+	Updateheight(node);
+	Updateheight(left_node);
+
+	return left_node;
+}
+
+avl_node* Updateheight(avl_node* node) {
+	if (node == NULL) {
+		return NULL;
+	};
+	node->height=max_height(return_height(node->left_tree),return_height(node->right_tree))+1;//子树的高度再加一
+	return node;
+}
+
+int max_height(int a, int b) {
+	return (a >= b) ? a : b;
+}
+
+int return_height(avl_node* node) {
+	return node == NULL?0: node->height;
+}
+
+int get_balance(avl_node* node) {
+	if (node == NULL) {
+		return 0;
+	};
+	return return_height(node->left_tree) - return_height(node->right_tree);
 }
