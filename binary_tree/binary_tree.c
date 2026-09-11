@@ -70,9 +70,9 @@ void printf_tree(node* root) {
 		printf("the node is NULL.\n");
 		return;
 	};
-	//printf("the current node's num is %d\n", root->num);
-	printf_tree(root->left_child);
 	printf("the current node's num is %d\n", root->num);
+	printf_tree(root->left_child);
+	//printf("the current node's num is %d\n", root->num);
 	printf_tree(root->right_child);
 	//printf("the current node's num is %d\n", root->num);
 }
