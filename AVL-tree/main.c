@@ -8,6 +8,8 @@ int main(void) {
 	tree = recursion_insert_node(tree, 3);
 	tree = recursion_insert_node(tree, 2);
 	tree = recursion_insert_node(tree, 1);
+
+	tree = delete_node(tree, 1);
 	printf_tree(tree);
 	return 0;
 };
