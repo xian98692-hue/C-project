@@ -127,3 +127,66 @@ int get_balance(avl_node* node) {
 	};
 	return return_height(node->left_tree) - return_height(node->right_tree);
 }
+
+avl_node* delete_node(avl_node* node,int target_num) {
+	if (!node) {
+		printf("the current node is NULL.\n");
+		return NULL;
+	};
+	if (target_num < node->num) {
+		node->left_tree = delete_node(node->left_tree, target_num);
+	}
+	else if (target_num > node->num) {
+		node->right_tree = delete_node(node->right_tree, target_num);
+	}
+	else if(target_num==node->num) {
+		if (node->left_tree && node->right_tree) {
+			avl_node* min_node = find_min(node->right_tree);
+			node->num = min_node->num;
+			printf("find the target.%d\n", &target_num);
+			node->right_tree = delete_node(node->right_tree, min_node->num);
+		}
+		else if (node->right_tree != NULL) {
+			avl_node* temp = node->right_tree;
+			free(node);
+			printf("delete successfully.\n");
+			return temp;
+		}
+		else if (node->right_tree == NULL) {
+			return NULL;
+		};
+	};
+
+	Updateheight(node);
+	int balance = get_balance(node);
+
+	if (balance > 1 && get_balance(node->left_tree) > 0) {//LL
+		return right_rotation(node);
+	}
+	else if (balance > 1 && get_balance(node->left_tree) < 0) {//LR
+		node->left_tree = left_rotation(node->left_tree);
+		return right_rotation(node);
+	}
+	else if (balance < -1 && get_balance(node->right_tree) < 0) {//RR
+		return left_rotation(node);
+	}
+	else if (balance < -1 && get_balance(node->right_tree)>0) {//RL
+		node->right_tree = right_rotation(node->right_tree);
+		return left_rotation(node);
+	};
+
+	return node;
+}
+
+avl_node* find_min(avl_node* node) {
+	if (node == NULL) {
+		printf("the input node is NULL.\n");
+		return NULL;
+	};
+	avl_node* parent = NULL;
+	while (node) {
+		parent = node;
+		node = node->left_tree;
+	};
+	return parent;
+}

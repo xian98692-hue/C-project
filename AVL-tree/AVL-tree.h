@@ -17,6 +17,8 @@ avl_node* Updateheight(avl_node* node);
 int max_height(int a, int b);
 int return_height(avl_node* node);
 int get_balance(avl_node* node);
-
+avl_node* delete_node(avl_node* node,int target_num);
 void printf_tree(avl_node* root);
+
+avl_node* find_min(avl_node* node);
 #endif
