@@ -143,7 +143,7 @@ avl_node* delete_node(avl_node* node,int target_num) {
 		if (node->left_tree && node->right_tree) {
 			avl_node* min_node = find_min(node->right_tree);
 			node->num = min_node->num;
-			printf("find the target.%d\n", &target_num);
+			printf("find the target.%d\n", target_num);
 			node->right_tree = delete_node(node->right_tree, min_node->num);
 		}
 		else if (node->right_tree != NULL) {
