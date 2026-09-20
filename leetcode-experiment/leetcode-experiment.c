@@ -1,35 +1,5 @@
 #include"experiment.h"
-/*
-void deduplicate(int** res, int rows) {
-	//去重
-	//把res内重复的数组去掉，不分顺序
-	//排序后比较
-	for (int i = 0; i < rows; i++) {//先对内部的每一个数组的整数进行排序
-		int curr_i = res[i][0];
-		int curr_j = res[i][1];
-		int curr_k = res[i][2];
-		if (curr_i < curr_k < curr_j) {
-			res[i][1] = curr_k;
-			res[i][2] = curr_j;
-		}
-		else if (curr_j < curr_i < curr_k) {
-			res[i][0] = curr_j;
-			res[i][1] = curr_i;
-		}
-		else if (curr_k < curr_j < curr_i) {
-			res[i][0] = curr_k;
-			res[i][2] = curr_i;
-		}
-		else if (curr_k < curr_i < curr_j) {
-			res[i][0] = curr_k;
-			res[i][1] = curr_i;
-			res[i][2] = curr_j;
-		}
 
-	}
-
-}
-*/
 unsigned factorial(unsigned n) {
 	if (n == 0 || n == 1) {
 		return 1;
@@ -51,6 +21,15 @@ void two_variable_traversal(int* nums,int numsSize) {//遍历2个变量的不同
 	for (int i = 0; i < numsSize; i++) {
 		for (int j = i + 1; j < numsSize; j++) {
 			printf("the traversal nums combination is %d--%d.\n", nums[i], nums[j]);
+		}
+	}
+}
+void three_variable_traversal(int* nums, int numsSize) {
+	for (int i = 0; i < numsSize; i++) {
+		for (int j = i + 1; j < numsSize; j++) {
+			for (int k = j + 1; k < numsSize; k++) {
+				printf("the traversal nums combination is %d-%d-%d.\n", nums[i], nums[j], nums[k]);
+			}
 		}
 	}
 }

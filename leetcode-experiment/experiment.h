@@ -6,3 +6,4 @@ unsigned factorial(unsigned n);
 void two_variable_traversal(int* nums, int numsSize);
 unsigned count_permutation(unsigned n, unsigned k);
 unsigned int count_combination(unsigned int n, unsigned int k);
+void three_variable_traversal(int* nums, int numsSize);
