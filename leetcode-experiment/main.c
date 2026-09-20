@@ -15,8 +15,8 @@ int main(void) {
 	int arr[5] = { 1,2,3,4,5 };
 	int* nums = &arr[0];//int* nums=arr;
 	two_variable_traversal(nums, 5);
-
+	three_variable_traversal(nums, 5);
 	printf("the permutation is %d.\n", count_permutation(10, 3));
-	printf("the combinations count is %d.\n", count_combination(6, 3));
+	printf("the combinations count is %d.\n", count_combination(5, 3));
 	return 0;
 }
