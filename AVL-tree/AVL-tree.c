@@ -146,15 +146,12 @@ avl_node* delete_node(avl_node* node,int target_num) {
 			printf("find the target.%d\n", target_num);
 			node->right_tree = delete_node(node->right_tree, min_node->num);
 		}
-		else if (node->right_tree != NULL) {
-			avl_node* temp = node->right_tree;
+		else {
+			//0个或1个子节点
+			avl_node* temp = node->left_tree ? node->left_tree : node->right_tree;
 			free(node);
-			printf("delete successfully.\n");
 			return temp;
 		}
-		else if (node->right_tree == NULL) {
-			return NULL;
-		};
 	};
 
 	Updateheight(node);
