@@ -21,4 +21,5 @@ avl_node* delete_node(avl_node* node,int target_num);
 void printf_tree(avl_node* root);
 
 avl_node* find_min(avl_node* node);
+avl_node* iteration_insert_node(avl_node* node, int num);
 #endif

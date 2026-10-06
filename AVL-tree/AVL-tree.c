@@ -50,7 +50,7 @@ avl_node* recursion_insert_node(avl_node* node, int num) {
 
 	int balance = get_balance(node);//left-right
 	//get_balance()返回的值大于0是左重，小于0是右重
-	if (balance == 2 && get_balance(node->left_tree)>=0) {//LL
+	if (balance == 2 && get_balance(node->left_tree) >= 0) {//LL
 		return right_rotation(node);
 	}
 	else if (balance == -2 && get_balance(node->right_tree) < 0) {//RR
@@ -109,7 +109,7 @@ avl_node* Updateheight(avl_node* node) {
 	if (node == NULL) {
 		return NULL;
 	};
-	node->height=max_height(return_height(node->left_tree),return_height(node->right_tree))+1;//子树的高度再加一
+	node->height = max_height(return_height(node->left_tree), return_height(node->right_tree)) + 1;//子树的高度再加一
 	return node;
 }
 
@@ -118,17 +118,26 @@ int max_height(int a, int b) {
 }
 
 int return_height(avl_node* node) {
-	return node == NULL?0: node->height;
+	return node == NULL ? 0 : node->height;
 }
 
 int get_balance(avl_node* node) {
 	if (node == NULL) {
 		return 0;
 	};
+	if (node->left_tree == NULL && node->right_tree) {
+		return -return_height(node->right_tree);
+	}
+	else if (node->right_tree == NULL && node->left_tree) {
+		return return_height(node->left_tree);
+	}
+	else if (node->left_tree == NULL && node->right_tree == NULL) {
+		return 0;
+	}
 	return return_height(node->left_tree) - return_height(node->right_tree);
 }
 
-avl_node* delete_node(avl_node* node,int target_num) {
+avl_node* delete_node(avl_node* node, int target_num) {
 	if (!node) {
 		printf("the current node is NULL.\n");
 		return NULL;
@@ -139,7 +148,7 @@ avl_node* delete_node(avl_node* node,int target_num) {
 	else if (target_num > node->num) {
 		node->right_tree = delete_node(node->right_tree, target_num);
 	}
-	else if(target_num==node->num) {
+	else if (target_num == node->num) {
 		if (node->left_tree && node->right_tree) {
 			avl_node* min_node = find_min(node->right_tree);
 			node->num = min_node->num;
@@ -186,4 +195,125 @@ avl_node* find_min(avl_node* node) {
 		node = node->left_tree;
 	};
 	return parent;
+}
+
+/*
+插入后必须能从插入点一路回溯到根。但avl_node 没有 parent 指针，
+所以需要在向下查找插入位置时，用一个栈把路径上的节点保存下来。
+插入完成后，从栈顶，也就是插入节点的父节点开始，向上逐个更新高度、计算平衡因子、做旋转，
+并把旋转后的新子树根接回它的父节点或更新整棵树的根
+*/
+avl_node* iteration_insert_node(avl_node* node, int num) {
+	if (node == NULL) {
+		avl_node* new_node = create_node(num);
+		return new_node;
+	}
+	avl_node* head = node;
+	avl_node* prev = node;
+	avl_node* stack[100] = { 0 };
+	int top = -1;
+
+	while (node != NULL) {
+		if (num < node->num) {
+			prev = node;
+			stack[++top] = prev;
+			node = node->left_tree;
+		}
+		else if (num > node->num) {
+			prev = node;
+			stack[++top] = prev;
+			node = node->right_tree;
+		}
+		else {
+			printf("the target num has been exited.no need insert.\n");
+			return head;
+		}
+	}
+	avl_node* new_node = create_node(num);
+	if (prev->num > num) {
+		prev->left_tree = new_node;
+	}
+	else {
+		prev->right_tree = new_node;
+	}
+	while (top != 0) {
+		avl_node* curr_parent = stack[top--];
+		Updateheight(curr_parent);
+		prev = stack[top];
+		int balance = get_balance(curr_parent);
+		if (balance > 1) {
+			int bal = get_balance(curr_parent->left_tree);
+			if (bal > 0) {
+				//LL
+				if (prev->num > curr_parent->num) {
+					prev->left_tree = right_rotation(curr_parent);
+				}
+				else if (prev->num < curr_parent->num)
+				{
+					prev->right_tree = right_rotation(curr_parent);
+				}
+			}
+			else if (bal < 0) {
+				//LR
+				curr_parent->left_tree = left_rotation(curr_parent->left_tree);
+				if (prev->num > curr_parent->num) {
+					prev->left_tree = right_rotation(curr_parent);
+				}
+				else if (prev->num < curr_parent->num) {
+					prev->right_tree = right_rotation(curr_parent);
+				}
+
+			}
+		}
+		else if (balance < -1) {
+			int bal = get_balance(curr_parent->right_tree);
+			if (bal > 0) {
+				//RL
+				curr_parent->right_tree = right_rotation(curr_parent->right_tree);
+				if (prev->num > curr_parent->num) {
+					prev->left_tree = left_rotation(curr_parent);
+				}
+				else if (prev->num < curr_parent->num) {
+					prev->right_tree = left_rotation(curr_parent);
+				}
+			}
+			else if (bal < 0) {
+				//RR
+				if (prev->num > curr_parent->num) {
+					prev->left_tree = left_rotation(curr_parent);
+				}
+				else if (prev->num < curr_parent->num) {
+					prev->right_tree = left_rotation(curr_parent);
+				}
+			}
+		}
+	}
+	Updateheight(stack[0]);
+	int balance = get_balance(stack[0]);
+	if (balance > 1) {
+		int bal = get_balance(head->left_tree);
+		if (bal > 0) {
+			//LL
+			head = right_rotation(head);
+		}
+		else if (bal < 0) {
+			//LR
+			head->left_tree = left_rotation(head->left_tree);
+			head = right_rotation(head);
+
+		}
+	}
+	else if (balance < -1) {
+		int bal = get_balance(head->right_tree);
+		if (bal > 0) {
+			//RL,右子树左重，父节点右重
+			head->right_tree = right_rotation(head->right_tree);
+			head = left_rotation(head);
+		}
+		else if (bal < 0) {
+			//RR
+			head = left_rotation(head);
+		}
+	}
+	return head;
 }
