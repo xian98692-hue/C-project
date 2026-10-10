@@ -21,6 +21,7 @@ int main(void) {
 	tree = iteration_insert_node(tree, 3);
 	tree = iteration_insert_node(tree, 8);
 	tree = iteration_insert_node(tree, 7);
+	tree = iteration_insert_node(tree, 14);
 	printf_tree(tree);
 	return 0;
 };
