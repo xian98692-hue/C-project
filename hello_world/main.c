@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#include<time.h>
+#include"binary-heap.h"
 int not_include_nums(int n) {
 	int count = 0;
 	char t[32];
@@ -40,13 +42,14 @@ void array_malloc(int* returnSize, int** returnColumnSizes) {
 	printf("free ok.\n");
 }
 int main() {
-	printf("Hello World.\n");
 	/*
+	printf("Hello World.\n");
+	
 	int s[10] = { 29,438,1928,4839,283,990,47,42,384,1209 };
 	for (int i = 0; i <= 9; i++) {
 		printf("%d\n", not_include_nums(s[i]));
 	};
-	*/
+	
 	int array[3] = {
 		1,2,3
 	};
@@ -55,5 +58,17 @@ int main() {
 	int size = 3;//3行
 	int* returnSize = &size;
 	array_malloc(returnSize,returnColumnSizes);
+	*/
+	srand((unsigned)time(NULL));
+    struct heap* new_heap = init_heap(20);
+	for (int j = 0; j < 10000;j++) {
+		int r =-10000+ rand() % 20001;//0-99999
+		insert(new_heap, r);
+	}
+	printf("the heap's size is %d \n", new_heap->size);
+	//printf("the array[%d]'s num is %d\n",0, new_heap->array[0]);
+	for (int i = 0; i < new_heap->size; i++) {
+		printf("the array[%d]'s num is %d", i, new_heap->array[i]);
+	}
 	return 0;
 };
