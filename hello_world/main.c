@@ -62,7 +62,7 @@ int main() {
 	srand((unsigned)time(NULL));
     struct heap* new_heap = init_heap(20);
 	for (int j = 0; j < 10000;j++) {
-		int r =-10000+ rand() % 20001;//0-99999
+		int r =-10000+ rand() % 20001;
 		insert(new_heap, r);
 	}
 	printf("the heap's size is %d \n", new_heap->size);
