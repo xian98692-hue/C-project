@@ -59,6 +59,7 @@ int main() {
 	int* returnSize = &size;
 	array_malloc(returnSize,returnColumnSizes);
 	*/
+	/*
 	srand((unsigned)time(NULL));
 	struct heap* new_heap = init_heap(20);
 	for (int j = 0; j < 100; j++) {
@@ -67,8 +68,35 @@ int main() {
 	}
 	printf("the heap's size is %d \n", new_heap->size);
 	//printf("the array[%d]'s num is %d\n",0, new_heap->array[0]);
-	for (int i = 0; i < new_heap->size; i++) {
-		printf("the array[%d]'s num is %d\n", i, new_heap->array[i]);
+	*/
+	struct heap* node = init_heap(20);
+	insert(node, 2);
+	insert(node, 1);
+	printf("the array[%d]'s num is %d\n", 0, node->array[0]);//the array[0]'s num is 1
+	delete_top(node);
+	printf("the array[%d]'s num is %d\n", 0, node->array[0]);//the array[0]'s num is 2
+	printf("the heap's size is %d \n", node->size);//1
+	insert(node, 3);
+	insert(node, 6);
+	insert(node, 8);
+	insert(node, 9);
+	insert(node, -1);
+	for (int i = 0; i < node->size; i++) {
+		printf("the array[%d]'s num is %d\n", i, node->array[i]);
 	}
+	/*the array[0]'s num is -1
+the array[1]'s num is 3
+the array[2]'s num is 2
+the array[3]'s num is 8
+the array[4]'s num is 9
+the array[5]'s num is 6*/
+	delete_top(node);
+	for (int i = 0; i < node->size; i++) {
+		printf("the array[%d]'s num is %d\n", i, node->array[i]);
+	}/*the array[0]'s num is 2
+the array[1]'s num is 3
+the array[2]'s num is 6
+the array[3]'s num is 8
+the array[4]'s num is 9*/
 	return 0;
 };
