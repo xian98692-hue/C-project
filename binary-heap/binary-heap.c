@@ -21,7 +21,7 @@ struct heap* init_heap(int max_capacity) {
 	H->size = 0;
 	H->capacity = max_capacity;
 	for (int cnt = 0; cnt < max_capacity; cnt++) {
-		H->array[cnt] = 999;//every element init to 0
+		H->array[cnt] = 999;//every element init to 999
 	}
 	return H;
 }
@@ -79,8 +79,8 @@ void delete_top(struct heap* heap) {//下沉
 			i = 2 * i + 1;
 		}
 	}
-	return;
 	heap->size--;
+	return;
 }
 void sink(struct heap* heap, int curr_idx) {//下沉
 	if (curr_idx * 2 + 1 >= heap->size) {
