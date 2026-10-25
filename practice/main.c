@@ -1,5 +1,7 @@
 #include<stdbool.h>
 #include<stdio.h>
+#include<stdlib.h>
+#include"sort.h"
 bool int_shift_are_arithmetic(void) {//判断机器是否使用算术右移
 	int x = ~0;
 	return (x >> 1) == x;
@@ -54,11 +56,24 @@ void truncate_bianry_num(int num, char s,int position) {
 	}
 }
 int main() {
-	printf("int_shift_are_arithmetic() = %d\n",
-		int_shift_are_arithmetic());
+	/*
 	print_binary_num(27282, 14);//110101010010010
 	printf("\n");
 	truncate_bianry_num(27282, '1', 7);//10010010
 	truncate_bianry_num(27282, '0', 7);//10010010
+	*/
+	int size = 10;
+	int* num = malloc(sizeof(int)*size);
+	int arr[10] = { 2,7,4,1,0,12,-6,9,3,-5};
+	for (int i = 0; i < size; i++) {
+		num[i] = arr[i];
+	}
+	//bubble_sort(num, size);//-6 -5 0 1 2 3 4 7 9 12
+	//insertion_sort(num, size);//-6 -5 0 1 2 3 4 7 9 12
+	shell_sort(num, size);//-6 -5 0 1 2 3 4 7 9 12
+	for (int cnt = 0; cnt < size; cnt++) {
+		printf("%d ", num[cnt]);
+	}
+	free(num);
 	return 0;
 }
