@@ -57,76 +57,115 @@ void insert(struct heap* heap, int num) {//上浮
 	heap->size++;
 	return;
 }
-void delete_top(struct heap* heap) {//下沉
-	int* arr = heap->array;
-	int end = arr[heap->size - 1];
-	arr[heap->size - 1] = 0;
-	arr[0] = end;
-	for (int i = 0; i < (heap->size - 3) / 2;) {
-		int left = arr[2 * i + 1];
-		int right = arr[2 * i + 2];
-		if (end < left && end < right) {
-			return;
-		}
-		if (left > right) {
-			arr[(i - 1) / 2] = right;
-			arr[2 * i + 2] = end;
-			i = 2 * i + 2;
-		}
-		else if (left <= right) {
-			arr[(i - 1) / 2] = left;
-			arr[2 * i + 1] = end;
-			i = 2 * i + 1;
-		}
-	}
-	heap->size--;
-	return;
-}
-void sink(struct heap* heap, int curr_idx) {//下沉
-	if (curr_idx * 2 + 1 >= heap->size) {
-		printf("the current idx's node is leave.no child.\n");
+void delete_top(struct heap* heap) {
+	if (heap == NULL || heap->size == 0) {
 		return;
 	}
 	int* arr = heap->array;
-	if (curr_idx * 2 + 2 >= heap->size && curr_idx * 2 + 1 < heap->size) {//单左叶子情形
-		printf("the current idx's node only has left child.\n");
-		if (arr[curr_idx * 2 + 1] < arr[curr_idx]) {
-			int temp = arr[curr_idx * 2 + 1];
-			arr[curr_idx * 2 + 1] = arr[curr_idx];
-			arr[curr_idx] = temp;
-			return;
-		}
+	int end = arr[heap->size - 1];
+	heap->size--;
+	if (heap->size == 0) {
+		return;
 	}
-	while (curr_idx != (heap->size - 1) && curr_idx != (heap->size - 2)) {
-		if (arr[curr_idx * 2 + 1] < arr[curr_idx] && arr[curr_idx * 2 + 2] < arr[curr_idx]) {//双叶子均小于
-			if (arr[curr_idx * 2 + 1] < arr[curr_idx * 2 + 2]) {
-				int temp = arr[curr_idx * 2 + 1];
-				arr[curr_idx * 2 + 1] = arr[curr_idx];
-				arr[curr_idx] = temp;
-				curr_idx = curr_idx * 2 + 1;
-			}
-			else {
-				int temp = arr[curr_idx * 2 + 2];
-				arr[curr_idx * 2 + 2] = arr[curr_idx];
-				arr[curr_idx] = temp;
-				curr_idx = curr_idx * 2 + 2;
-			}
-		}
-		else if (arr[curr_idx * 2 + 1] < arr[curr_idx]) {//只有左叶子小于
-			int temp = arr[curr_idx * 2 + 1];
-			arr[curr_idx * 2 + 1] = arr[curr_idx];
-			arr[curr_idx] = temp;
-			curr_idx = curr_idx * 2 + 1;
-		}
-		else {//只有右叶子小于
-			int temp = arr[curr_idx * 2 + 2];
-			arr[curr_idx * 2 + 2] = arr[curr_idx];
-			arr[curr_idx] = temp;
-			curr_idx = curr_idx * 2 + 2;
-		}
-		if (arr[curr_idx * 2 + 1] >= arr[curr_idx] && arr[curr_idx * 2 + 2] >= arr[curr_idx]) {
+	arr[0] = end;
+	int idx = 0;
+	while (1) {
+		int left_idx = 2 * idx + 1;
+		int right_idx = 2 * idx + 2;
+
+		// 没有左孩子 → 没有孩子 → 结束
+		if (left_idx >= heap->size) {
 			break;
 		}
+		// 先假设左孩子是较小孩子
+		int min_idx = left_idx;
+		// 只有右孩子存在时才能读 arr[right_idx]
+		if (right_idx < heap->size && arr[right_idx] < arr[left_idx]) {
+			min_idx = right_idx;
+		}
+		// 已满足最小堆性质
+		if (arr[idx] <= arr[min_idx]) {
+			break;
+		}
+		// 交换当前节点和较小孩子
+		int temp = arr[idx];
+		arr[idx] = arr[min_idx];
+		arr[min_idx] = temp;
+		// 继续下沉到被交换的孩子
+		idx = min_idx;
 	}
-	return;
 }
+int check_heap_sequence(struct heap* heap) {
+	if (heap == NULL || heap->size == 0) {
+		printf("the heap is null.\n");
+		return 0;
+	}
+	for (int i = 1; i < heap->size; i++) {
+		int parent = (i - 1) / 2;
+		if (heap->array[parent] > heap->array[i]) {
+			printf("the heap is not proper. i=%d, parent=%d\n", i, parent);
+			return 0;
+		}
+	}
+	return 1;
+}
+void sink(struct heap* heap, int curr_idx) {//下沉
+	if (heap == NULL||heap->size==0) {
+		printf("the heap is NULL or empty.\n");
+		return;
+	}
+	int* arr = heap->array;
+	while (1) {
+		if (curr_idx * 2 + 1 >= heap->size) {
+			printf("the current idx's node is leave.no child.\n");//无孩子
+			break;
+		}
+		int left = curr_idx * 2 + 1;
+		int right = curr_idx * 2 + 2;
+		int min_idx = left;
+		if (right < heap->size && arr[right] < arr[left]) {
+			min_idx = right;
+		}
+		if (arr[min_idx] >= arr[curr_idx]) {
+			break;
+		}
+		int temp = arr[min_idx];
+		arr[min_idx] = arr[curr_idx];
+		arr[curr_idx] = temp;
+		curr_idx = min_idx;
+	}
+	
+}
+void delete_root(struct heap* heap) {
+	if (heap == NULL || heap->size == 0) {
+		printf("the heap is empty.\n");
+		return;
+	}
+	int* arr = heap->array;
+	int end = arr[heap->size - 1];
+	heap->size--;
+	if (heap->size == 0) {
+		return;  // 原来只有一个元素，删完为空，不需要下沉
+	}
+	arr[0] = end;
+	sink(heap, 0);
+}
+void print_heap(struct heap* heap) {
+	int* arr = heap->array;
+	printf("size = %d, capacity = %d\n", heap->size, heap->capacity);
+	printf("heap is [");
+	for (int i = 0; i < heap->size; i++) {
+		printf("%d,",arr[i]);
+	}
+	printf("]");
+}
+/*
+d-堆：
+从下标 0 开始存储：
+父节点：(i - 1) / d
+1孩子：d * i + 1
+2孩子：d * i + 2
+3孩子：d*i+3
+...
+d孩子：d*i+d
+*/
