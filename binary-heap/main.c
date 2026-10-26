@@ -69,34 +69,21 @@ int main() {
 	printf("the heap's size is %d \n", new_heap->size);
 	//printf("the array[%d]'s num is %d\n",0, new_heap->array[0]);
 	*/
-	struct heap* node = init_heap(20);
-	insert(node, 2);
-	insert(node, 1);
-	printf("the array[%d]'s num is %d\n", 0, node->array[0]);//the array[0]'s num is 1
-	delete_top(node);
-	printf("the array[%d]'s num is %d\n", 0, node->array[0]);//the array[0]'s num is 2
-	printf("the heap's size is %d \n", node->size);//1
-	insert(node, 3);
-	insert(node, 6);
-	insert(node, 8);
-	insert(node, 9);
-	insert(node, -1);
-	for (int i = 0; i < node->size; i++) {
-		printf("the array[%d]'s num is %d\n", i, node->array[i]);
+	struct heap* h = init_heap(10);
+
+	int a[] = { 1, 3, 2, 7, 8, 9, 10 };
+	for (int i = 0; i < 7; i++) {
+		insert(h, a[i]);
 	}
-	/*the array[0]'s num is -1
-the array[1]'s num is 3
-the array[2]'s num is 2
-the array[3]'s num is 8
-the array[4]'s num is 9
-the array[5]'s num is 6*/
-	delete_top(node);
-	for (int i = 0; i < node->size; i++) {
-		printf("the array[%d]'s num is %d\n", i, node->array[i]);
-	}/*the array[0]'s num is 2
-the array[1]'s num is 3
-the array[2]'s num is 6
-the array[3]'s num is 8
-the array[4]'s num is 9*/
+
+	// 手动破坏：把根改成 100
+	h->array[0] = 100;
+	print_heap(h);
+
+	sink(h, 0);
+	print_heap(h);
+	// 期望恢复最小堆，根变成 2 或 3
+	check_heap_sequence(h);
+	
 	return 0;
 };
