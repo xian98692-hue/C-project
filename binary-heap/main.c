@@ -69,6 +69,7 @@ int main() {
 	printf("the heap's size is %d \n", new_heap->size);
 	//printf("the array[%d]'s num is %d\n",0, new_heap->array[0]);
 	*/
+	/*
 	struct heap* h = init_heap(10);
 
 	int a[] = { 1, 3, 2, 7, 8, 9, 10 };
@@ -84,6 +85,19 @@ int main() {
 	print_heap(h);
 	// 期望恢复最小堆，根变成 2 或 3
 	check_heap_sequence(h);
-	
+	*/
+
+	leh* root=NULL;
+	leh* root1=NULL;
+	int arr[8] = { 3,10,21,14,23,8,17,26 };
+	int att[8] = { 1,5,-7,9,12,-9,25,22 };
+	for (int i = 0; i < 8; i++) {
+		root = insert_leh(root, arr[i]);
+		root1 = insert_leh(root1, att[i]);
+	}
+	printf("\n");
+	root = iteration_merge(root, root1);
+	print_leh(root);
+	free_leh(root);
 	return 0;
 };
