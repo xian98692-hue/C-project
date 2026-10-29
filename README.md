@@ -1,307 +1,233 @@
-C语言写
-有关数据结构或简单程序
+# 📚 Data Structures & Algorithms Quick Reference
 
-\# 📚 常见数据结构速览
+> A C-oriented quick reference for common data structures and simple algorithms.  
+> Diagrams use Mermaid and render directly on GitHub. If Mermaid is not supported, the text and tables remain readable.
 
+---
 
+## 📋 Complexity Cheat Sheet
 
-> 本文简单介绍 7 种常见数据结构：栈、链表、二叉树、AVL 树、哈希表、队列、图。  
+### Data Structures
 
-> 图中使用 Mermaid 渲染，GitHub 可直接显示；若平台不支持 Mermaid，可保留文字和表格。
-
-
-
-\## 📋 复杂度速查表
-
-
-
-| 数据结构 | 访问 | 查找 | 插入 | 删除 | 核心特点 |
-
+| Data Structure | Access | Search | Insert | Delete | Key Characteristics |
 |---|---|---|---|---|---|
+| Stack | O(1) top | O(n) | O(1) | O(1) | LIFO: last in, first out |
+| Linked List | O(n) | O(n) | O(1)* | O(1)* | Nodes connected by pointers |
+| Binary Tree | O(log n) average | O(log n) average | O(log n) average | O(log n) average | Ordered hierarchical structure |
+| AVL Tree | O(log n) | O(log n) | O(log n) | O(log n) | Self-balancing binary search tree |
+| Hash Table | — | O(1) average | O(1) average | O(1) average | Key-value mapping with collision handling |
+| Queue | O(1) front | O(n) | O(1) | O(1) | FIFO: first in, first out |
+| Graph | — | Depends on representation | O(1) add edge | O(1) / O(degree) | Represents entities and relationships |
+| Binary Heap | O(1) root | O(n) | O(log n) | O(log n) extract root | Complete tree; priority queue |
+| Leftist Heap | O(1) root | O(n) | O(log n) | O(log n) | Mergeable heap; leftist property |
 
-| 栈 | O(1) 访问栈顶 | O(n) | O(1) | O(1) | 后进先出 LIFO |
+> \* Linked list insertion/deletion is O(1) once the target position is already known; finding that position still requires O(n).  
+> A plain binary search tree may degrade into a linked list in the worst case, making operations O(n).
 
-| 链表 | O(n) | O(n) | O(1)\* | O(1)\* | 节点通过指针连接 |
+### Algorithms
 
-| 二叉树 | O(log n) 平均 | O(log n) 平均 | O(log n) 平均 | O(log n) 平均 | 有序层级结构 |
+| Algorithm | Best | Average | Worst | Space | Stable |
+|---|---|---|---|---|---|
+| Insertion Sort | O(n) | O(n²) | O(n²) | O(1) | Yes |
 
-| AVL 树 | O(log n) | O(log n) | O(log n) | O(log n) | 自平衡二叉搜索树 |
+---
 
-| 哈希表 | — | O(1) 平均 | O(1) 平均 | O(1) 平均 | 键值映射，冲突处理 |
+## 🧱 Data Structures
 
-| 队列 | O(1) 访问队头 | O(n) | O(1) | O(1) | 先进先出 FIFO |
+### 1. 🥞 Stack
 
-| 图 | — | 取决于存储结构 | O(1) 加边 | O(1)/O(degree) | 表示实体及关系 |
-
-
-
-> \*链表插入/删除若已定位到目标位置，时间复杂度为 O(1)；查找目标位置仍需 O(n)。  
-
-> 普通二叉搜索树最坏可能退化为链表，复杂度变为 O(n)。
-
-
-
-\---
-
-
-
-\## 1. 🥞 栈（Stack）
-
-
-
-\*\*简介\*\*：栈是一种“后进先出”（LIFO）的线性结构，只能在栈顶进行插入和删除。  
-
-\*\*常见操作\*\*：`push` 入栈、`pop` 出栈、`peek` 查看栈顶。  
-
-\*\*典型应用\*\*：函数调用栈、括号匹配、表达式求值、撤销操作。
-
-
+**Overview**: A stack is a linear structure that follows **LIFO** (last in, first out). Insertion and deletion happen only at the top.  
+**Common operations**: `push`, `pop`, `peek`.  
+**Typical applications**: Function call stack, bracket matching, expression evaluation, undo operations.
 
 ```mermaid
-
 flowchart TB
-
-&#x20;   subgraph S\["栈：后进先出 LIFO"]
-
-&#x20;       direction TB
-
-&#x20;       T\["栈顶 top"] --> A\["3"]
-
-&#x20;       A --> B\["2"]
-
-&#x20;       B --> C\["1"]
-
-&#x20;       C --> D\["栈底 bottom"]
-
-&#x20;   end
-
+    subgraph S["Stack: LIFO"]
+        direction TB
+        T["Top"] --> A["3"]
+        A --> B["2"]
+        B --> C["1"]
+        C --> D["Bottom"]
+    end
 ```
 
+---
 
+### 2. 🔗 Linked List
 
-\---
-
-
-
-\## 2. 🔗 链表（Linked List）
-
-
-
-\*\*简介\*\*：链表由一系列节点组成，每个节点保存数据和指向下一个节点的指针。  
-
-\*\*常见类型\*\*：单链表、双链表、循环链表。  
-
-\*\*优点\*\*：插入和删除灵活，不需要连续内存。  
-
-\*\*缺点\*\*：不能随机访问，查找需要从头遍历。
-
-
+**Overview**: A linked list consists of nodes. Each node stores data and a pointer to the next node.  
+**Common types**: Singly linked list, doubly linked list, circular linked list.  
+**Advantages**: Flexible insertion and deletion; no contiguous memory required.  
+**Disadvantages**: No random access; searching requires traversal from the head.
 
 ```mermaid
-
 flowchart LR
-
-&#x20;   H\["head"] --> A\["1"] --> B\["2"] --> C\["3"] --> N\["null"]
-
+    H["head"] --> A["1"] --> B["2"] --> C["3"] --> N["null"]
 ```
 
+---
 
+### 3. 🌳 Binary Tree
 
-\---
-
-
-
-\## 3. 🌳 二叉树（Binary Tree）
-
-
-
-\*\*简介\*\*：每个节点最多有两个子节点，分别称为左子节点和右子节点。  
-
-\*\*二叉搜索树 BST\*\*：左子树节点值小于根，右子树节点值大于根。  
-
-\*\*典型应用\*\*：搜索、排序、表达式树、文件系统目录结构。
-
-
+**Overview**: Each node has at most two children: a left child and a right child.  
+**Binary Search Tree (BST)**: For each node, values in the left subtree are smaller, and values in the right subtree are larger.  
+**Typical applications**: Searching, sorting, expression trees, file system directory structures.
 
 ```mermaid
-
 flowchart TB
-
-&#x20;   A\["根 8"] --> B\["左 3"]
-
-&#x20;   A --> C\["右 10"]
-
-&#x20;   B --> D\["1"]
-
-&#x20;   B --> E\["6"]
-
+    A["Root 8"] --> B["Left 3"]
+    A --> C["Right 10"]
+    B --> D["1"]
+    B --> E["6"]
 ```
 
+---
 
+### 4. ⚖️ AVL Tree
 
-\---
-
-
-
-\## 4. ⚖️ AVL 树（AVL Tree）
-
-
-
-\*\*简介\*\*：AVL 树是一种自平衡二叉搜索树，任意节点的左右子树高度差绝对值不超过 1。  
-
-\*\*平衡因子\*\*：`左子树高度 - 右子树高度`，取值为 -1、0、1。  
-
-\*\*保持平衡\*\*：通过左旋、右旋、左右旋、右左旋调整。  
-
-\*\*优点\*\*：查找、插入、删除都能稳定保持 O(log n)。
-
-
+**Overview**: An AVL tree is a self-balancing binary search tree. For every node, the absolute height difference between its left and right subtrees is at most 1.  
+**Balance factor**: `height(left subtree) - height(right subtree)`, with values -1, 0, or 1.  
+**Balancing operations**: Left rotation, right rotation, left-right rotation, and right-left rotation.  
+**Advantage**: Search, insertion, and deletion are guaranteed to stay O(log n).
 
 ```mermaid
-
 flowchart TB
-
-&#x20;   A\["30 BF=0"] --> B\["20 BF=0"]
-
-&#x20;   A --> C\["40 BF=0"]
-
-&#x20;   B --> D\["10 BF=0"]
-
-&#x20;   B --> E\["25 BF=0"]
-
+    A["30 BF=0"] --> B["20 BF=0"]
+    A --> C["40 BF=0"]
+    B --> D["10 BF=0"]
+    B --> E["25 BF=0"]
 ```
 
+> `BF` means balance factor. AVL trees use rotations to avoid the degeneration seen in plain BSTs.
 
+---
 
-> 图中 BF 表示平衡因子。AVL 树会通过旋转避免普通 BST 退化成链表。
+### 5. 🗂️ Hash Table
 
-
-
-\---
-
-
-
-\## 5. 🗂️ 哈希表（Hash Table）
-
-
-
-\*\*简介\*\*：哈希表通过哈希函数把键映射到数组中的桶，从而实现快速键值查找。  
-
-\*\*冲突处理\*\*：链地址法、开放寻址法等。  
-
-\*\*优点\*\*：平均查找、插入、删除接近 O(1)。  
-
-\*\*缺点\*\*：最坏情况可能退化到 O(n)，需要好的哈希函数和扩容策略。
-
-
+**Overview**: A hash table maps keys to buckets in an array using a hash function, enabling fast key-value lookup.  
+**Collision handling**: Separate chaining, open addressing, and other strategies.  
+**Advantages**: Average search, insertion, and deletion are close to O(1).  
+**Disadvantages**: Worst-case performance may degrade to O(n); a good hash function and resizing strategy are important.
 
 ```mermaid
-
 flowchart LR
-
-&#x20;   K\["key"] --> H\["hash(key)"]
-
-&#x20;   H --> B0\["桶 0"]
-
-&#x20;   H --> B1\["桶 1"]
-
-&#x20;   H --> B2\["桶 2"]
-
-&#x20;   B1 --> N1\["k1: v1"] --> N2\["k2: v2"]
-
+    K["key"] --> H["hash(key)"]
+    H --> B0["Bucket 0"]
+    H --> B1["Bucket 1"]
+    H --> B2["Bucket 2"]
+    B1 --> N1["k1: v1"] --> N2["k2: v2"]
 ```
 
+---
 
+### 6. 🚶 Queue
 
-\---
-
-
-
-\## 6. 🚶 队列（Queue）
-
-
-
-\*\*简介\*\*：队列是一种“先进先出”（FIFO）的线性结构，从队尾入队，从队头出队。  
-
-\*\*常见操作\*\*：`enqueue` 入队、`dequeue` 出队、`front` 查看队头。  
-
-\*\*变体\*\*：循环队列、双端队列、优先队列。  
-
-\*\*典型应用\*\*：任务调度、消息队列、广度优先搜索 BFS。
-
-
+**Overview**: A queue is a linear structure that follows **FIFO** (first in, first out). Elements enter at the rear and leave from the front.  
+**Common operations**: `enqueue`, `dequeue`, `front`.  
+**Variants**: Circular queue, double-ended queue, priority queue.  
+**Typical applications**: Task scheduling, message queues, breadth-first search (BFS).
 
 ```mermaid
-
 flowchart LR
-
-&#x20;   F\["队头 front"] --> A\["1"] --> B\["2"] --> C\["3"] --> R\["队尾 rear"]
-
-&#x20;   E\["入队 enqueue →"] -.-> R
-
-&#x20;   F -.-> D\["← 出队 dequeue"]
-
+    F["Front"] --> A["1"] --> B["2"] --> C["3"] --> R["Rear"]
+    E["enqueue →"] -.-> R
+    F -.-> D["← dequeue"]
 ```
 
+---
 
+### 7. 🕸️ Graph
 
-\---
-
-
-
-\## 7. 🕸️ 图（Graph）
-
-
-
-\*\*简介\*\*：图由顶点和边组成，用于表示对象之间的关系。  
-
-\*\*分类\*\*：有向图/无向图、带权图/无权图、连通图/非连通图。  
-
-\*\*常见存储\*\*：邻接矩阵、邻接表。  
-
-\*\*常见算法\*\*：DFS、BFS、Dijkstra、拓扑排序。  
-
-\*\*典型应用\*\*：社交网络、地图导航、依赖关系、推荐系统。
-
-
+**Overview**: A graph consists of vertices and edges, representing relationships between objects.  
+**Categories**: Directed/undirected, weighted/unweighted, connected/disconnected.  
+**Common representations**: Adjacency matrix, adjacency list.  
+**Common algorithms**: DFS, BFS, Dijkstra, topological sorting.  
+**Typical applications**: Social networks, map navigation, dependency graphs, recommendation systems.
 
 ```mermaid
-
 flowchart LR
-
-&#x20;   A\["A"] --- B\["B"]
-
-&#x20;   A --- C\["C"]
-
-&#x20;   B --- D\["D"]
-
-&#x20;   C --- D
-
-&#x20;   D --- E\["E"]
-
+    A["A"] --- B["B"]
+    A --- C["C"]
+    B --- D["D"]
+    C --- D
+    D --- E["E"]
 ```
 
+---
 
+### 8. 🧺 Binary Heap
 
-\---
+**Overview**: A binary heap is a complete binary tree that satisfies the heap property. In a min-heap, every parent is less than or equal to its children.  
+**Common operations**: `peek` root, `insert`, `extract min/max`.  
+**C implementation note**: A binary heap is usually stored in an array. For 0-based indexing, the children of index `i` are `2i + 1` and `2i + 2`.  
+**Typical applications**: Priority queues, heap sort, scheduling, top-k problems.
 
+```mermaid
+flowchart TB
+    A["Min-Heap Root 1"] --> B["2"]
+    A --> C["3"]
+    B --> D["4"]
+    B --> E["5"]
+    C --> F["6"]
+    C --> G["7"]
+```
 
+> Array representation: `[1, 2, 3, 4, 5, 6, 7]`.
 
-\## ✅ 小结
+---
 
+### 9. 🌿 Leftist Heap
 
+**Overview**: A leftist heap is a mergeable heap structure. It is a binary tree that satisfies the heap property and the **leftist property**.  
+**Leftist property**: For every node, `npl(left child) >= npl(right child)`, where `npl` is the null path length.  
+**Core operation**: `merge`. Insertion and deletion can both be implemented using merge.  
+**Advantage**: Efficient merging in O(log n).  
+**C implementation note**: Each node typically stores a rank or `npl` value to maintain the leftist property.  
+**Typical applications**: Priority queues that require efficient merge operations, graph algorithms, event simulation.
 
-\- \*\*栈 / 队列\*\*：操作受限的线性结构，分别对应 LIFO 和 FIFO。
+```mermaid
+flowchart TB
+    A["Root 10"] --> B["Left 20"]
+    A --> C["Right 30"]
+    B --> D["40"]
+    B --> E["50"]
+    C --> F["60"]
+```
 
-\- \*\*链表\*\*：靠指针连接，插入删除灵活，随机访问较弱。
+> The left subtree is kept at least as “heavy” as the right subtree according to null path length.
 
-\- \*\*二叉树 / AVL 树\*\*：层级搜索结构；AVL 通过旋转保持平衡。
+---
 
-\- \*\*哈希表\*\*：用空间换时间，平均 O(1) 查找。
+## ⚙️ Algorithms
 
-\- \*\*图\*\*：表达能力最强，适合建模复杂关系。
+### 10. 🔃 Insertion Sort
 
+**Overview**: Insertion sort builds a sorted prefix one element at a time. It takes the current key and shifts larger elements to the right until the correct position is found.  
+**Characteristics**: Stable, in-place, simple to implement.  
+**Best case**: O(n) when the array is already nearly sorted.  
+**Average / worst case**: O(n²).  
+**Typical applications**: Small arrays, nearly sorted data, simple teaching examples.
 
+```mermaid
+flowchart LR
+    A["Sorted prefix"] --> B["Current key"] --> C["Unsorted suffix"]
+    B -.->|Shift larger elements right| A
+    C -.->|Next iteration| B
+```
 
-> 选型建议：先看操作模式（LIFO/FIFO/键值/关系），再看查找、插入、删除的频率和顺序要求。
+> C implementation hint: use a loop to compare the current key with elements in the sorted prefix and shift them right.
 
+---
+
+## ✅ Summary
+
+- **Stack / Queue**: Restricted linear structures with LIFO and FIFO behavior.
+- **Linked List**: Pointer-based structure with flexible insertion/deletion but weak random access.
+- **Binary Tree / AVL Tree**: Hierarchical search structures; AVL trees maintain balance through rotations.
+- **Hash Table**: Trades space for time, with average O(1) lookup.
+- **Graph**: The most expressive structure for modeling complex relationships.
+- **Binary Heap**: Complete tree stored in an array; ideal for priority queues.
+- **Leftist Heap**: Mergeable heap with O(log n) merge, insert, and delete.
+- **Insertion Sort**: Simple stable sorting algorithm; efficient for small or nearly sorted arrays.
+
+> Selection advice: first identify the operation pattern (LIFO / FIFO / key-value / relationships / priority / merging), then consider the required frequency and ordering of search, insertion, and deletion.
