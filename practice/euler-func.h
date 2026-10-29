@@ -1,0 +1,1 @@
+long long phi_efficient(long long n);
