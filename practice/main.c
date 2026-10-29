@@ -1,13 +1,15 @@
 //#define ENABLE_BINARY_NUM  
+//#define MAIN
 #ifdef ENABLE_BINARY_NUM
 #include "binary-num.h"
 #endif
 
+#include"euler-func.h"
+#ifdef MAIN
+
 #include<stdio.h>
 #include<stdlib.h>
 #include"sort.h"
-
-#include"euler-func.h"
 int main() {
 #ifdef ENABLE_BINARY_NUM
 	print_binary_num(27283, 14);
@@ -15,8 +17,7 @@ int main() {
 	truncate_bianry_num(27283, '1', 7);
 	truncate_bianry_num(27283, '0', 7);
 #endif
-
-	/*
+	
 	int size = 10;
 	int* num = malloc(sizeof(int)*size);
 	int arr[10] = { 2,7,4,1,0,12,-6,9,3,-5};
@@ -30,7 +31,7 @@ int main() {
 		printf("%d ", num[cnt]);
 	}
 	free(num);
-	*/
+	
 	/*
 	// 使用当前时间作为随机数种子，确保每次运行结果不同
 	srand((unsigned int)time(NULL));
@@ -44,3 +45,4 @@ int main() {
 	*/
 	return 0;
 }
+#endif
