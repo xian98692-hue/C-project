@@ -16,9 +16,11 @@ typedef struct forest//数组里，下标i对于第i棵树
 node* merge_node(node* x, node* y);
 queue* merge_queue(queue* x, queue* y);
 queue* insert_queue(queue* forest, int val);
-queue* deletemin(queue* forest);
+queue* delete_and_find_min(queue* forest, int* num);
 unsigned int get_height(node* x);
 bool check_same_height(node* x, node* y);
 void print_queue(queue* forest);
-queue* create_queue(unsigned int capa,int val);
+void print_tree(node* root);
+queue* create_queue(unsigned int capa, int val);
+void clear_queue(queue* x);
 #endif // !BINOMIAL_QUEUE_H
