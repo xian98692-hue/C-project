@@ -1,9 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
+//#define MAIN
 #include <stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include<time.h>
-#include"binary-heap.h"
 int not_include_nums(int n) {
 	int count = 0;
 	char t[32];
@@ -41,6 +38,12 @@ void array_malloc(int* returnSize, int** returnColumnSizes) {
 	free(res);
 	printf("free ok.\n");
 }
+#ifdef MAIN
+#include<string.h>
+#include<stdlib.h>
+#include<time.h>
+#include"binary-heap.h"
+
 int main() {
 	/*
 	printf("Hello World.\n");
@@ -101,3 +104,4 @@ int main() {
 	free_leh(root);
 	return 0;
 };
+#endif
