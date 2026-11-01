@@ -1,5 +1,5 @@
 //#define ENABLE_BINARY_NUM  
-//#define MAIN
+#define MAIN
 #ifdef ENABLE_BINARY_NUM
 #include "binary-num.h"
 #endif
@@ -26,7 +26,8 @@ int main() {
 	}
 	//bubble_sort(num, size);//-6 -5 0 1 2 3 4 7 9 12
 	//insertion_sort(num, size);//-6 -5 0 1 2 3 4 7 9 12
-	shell_sort(num, size);//-6 -5 0 1 2 3 4 7 9 12
+	//shell_sort(num, size);//-6 -5 0 1 2 3 4 7 9 12
+	selection_sort(num, size);//-6 -5 0 1 2 3 4 7 9 12
 	for (int cnt = 0; cnt < size; cnt++) {
 		printf("%d ", num[cnt]);
 	}
