@@ -55,3 +55,16 @@ void shell_sort(int* num, int size) {
 		gap /= 2;
 	}
 }
+void selection_sort(int* num, int size) {
+	for (int i = 0; i < size; i++) {
+		int curr = num[i];
+		int cnt = i;
+		for (int j = i + 1; j < size; j++) {
+			if (num[j] < num[cnt]) {
+				cnt = j;
+			}
+		}
+		num[i] = num[cnt];
+		num[cnt] = curr;
+	}
+}

@@ -3,4 +3,5 @@
 void insertion_sort(int* num, int size);
 void bubble_sort(int* num, int size);
 void insert_sort(int* num, int size);
+void selection_sort(int* num, int size);
 #endif 
