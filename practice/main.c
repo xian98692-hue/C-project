@@ -27,7 +27,9 @@ int main() {
 	//bubble_sort(num, size);//-6 -5 0 1 2 3 4 7 9 12
 	//insertion_sort(num, size);//-6 -5 0 1 2 3 4 7 9 12
 	//shell_sort(num, size);//-6 -5 0 1 2 3 4 7 9 12
-	selection_sort(num, size);//-6 -5 0 1 2 3 4 7 9 12
+	//selection_sort(num, size);//-6 -5 0 1 2 3 4 7 9 12
+	//merge_sort(num, size);//-6 -5 0 1 2 3 4 7 9 12
+	merge_sort_iteration(num, size);
 	for (int cnt = 0; cnt < size; cnt++) {
 		printf("%d ", num[cnt]);
 	}
