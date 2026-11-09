@@ -119,8 +119,8 @@ void merge_sort_iteration(int* num, int size) {
 			int mid = left + gap - 1;
 			int right = mid + gap;
 
-			if (mid >= size)break;
-			if (right >= size) {
+			if (mid >= size)break;//说明左半段大于尺寸，直接停止
+			if (right >= size) {//说明右半段需要截断
 				right =size-1;
 			}
 
